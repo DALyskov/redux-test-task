@@ -14,6 +14,11 @@ const filmsData = [
     date: new Date().toISOString(),
     inFavorite: false,
   },
+  {
+    name: 'Film 4',
+    date: new Date().toISOString(),
+    inFavorite: false,
+  },
 ]
 
 export const getFilmsList = () => new Promise(resolve => {

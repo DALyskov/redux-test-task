@@ -1,8 +1,9 @@
 import React from 'react';
-import Counter from "./Counter";
+// import Counter from "./Counter";
+import FilmsBord from "./FilmsBord";
 
 function Main() {
-  return <Counter />
+  return <FilmsBord />
 }
 
 export default Main;
