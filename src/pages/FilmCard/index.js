@@ -1,32 +1,29 @@
-import React, { useCallback, useState } from 'react';
-import moment from 'moment';
+import React, { useCallback, useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
 import styles from './index.module.css';
 
+import { getFormatedDate } from '../../common';
 import { changeFavoriteStatus } from '../../store/films/actions';
-
-const formatDate = (dateString) => {
-  const date = new Date(dateString);
-  const formatedDateString = moment(date).format('DD.MM.YYYY');
-  return formatedDateString;
-};
 
 function FilmCard(props) {
   const { filmData } = props;
   const dispatch = useDispatch();
   const [isDisabled, setIsDisabled] = useState(false);
+  const elmRef = useRef(null);
 
   const onChangeFavoriteStatus = useCallback(() => {
     setIsDisabled(true);
     dispatch(changeFavoriteStatus(filmData.name))
-      .then(() => setIsDisabled(false));
+      .then(() => {
+        elmRef.current && setIsDisabled(false);
+      });
   }, [dispatch, filmData]);
 
-  const date = formatDate(filmData.date);
+  const date = getFormatedDate(filmData.date);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} ref={elmRef}>
       <p>{filmData.name}</p>
       <p>{date}</p>
       <button onClick={onChangeFavoriteStatus} disabled={isDisabled}>
@@ -36,7 +33,6 @@ function FilmCard(props) {
       </button>
     </div>
   )
-
 }
 
 export default FilmCard;
