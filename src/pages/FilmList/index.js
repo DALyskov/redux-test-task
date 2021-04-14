@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import styles from './index.module.css';
 
@@ -22,6 +23,18 @@ function FilmList(props) {
       ))}
     </div>
   )
+}
+
+FilmList.propTypes = {
+  filmsData: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      date: PropTypes.string.isRequired,
+      inFavorite: PropTypes.bool.isRequired,
+    })
+  ).isRequired,
+
+  isFaviriteList: PropTypes.bool,
 }
 
 export default FilmList;

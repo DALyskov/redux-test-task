@@ -1,5 +1,6 @@
 import React, { useCallback, useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import styles from './index.module.css';
 
@@ -33,6 +34,14 @@ function FilmCard(props) {
       </button>
     </div>
   )
+}
+
+FilmCard.propTypes = {
+  filmData: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    inFavorite: PropTypes.bool.isRequired,
+  }).isRequired,
 }
 
 export default FilmCard;

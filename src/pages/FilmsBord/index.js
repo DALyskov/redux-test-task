@@ -1,18 +1,29 @@
-import React, {useCallback, useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import React, { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import styles from './index.module.css';
 
 import FilmList from '../FilmList';
-import {loadFilmsFromApi} from '../../store/films/actions';
+import { loadFilmsFromApi } from '../../store/films/actions';
+
+const withPropsValidation = (props) => {
+  PropTypes.checkPropTypes(propTypes, props, 'prop', '')
+  return props
+}
 
 function FilmsBord() {
-  const films = useSelector(state => state.films.filmsData);
-  const filmsIsLoaded = useSelector(state => state.films.statusLoadFilmms);
+  const { films, filmsIsLoaded } = withPropsValidation(
+    useSelector(state => ({
+      films: state.films.filmsData,
+      filmsIsLoaded: state.films.statusLoadFilmms,
+    }))
+  );
+
   const dispatch = useDispatch();
 
   const loadFilms = useCallback(() => {
-      dispatch(loadFilmsFromApi());
+    dispatch(loadFilmsFromApi());
   }, [dispatch]);
 
   useEffect(() => {
@@ -35,6 +46,18 @@ function FilmsBord() {
       />
     </section>
   )
+}
+
+const propTypes = {
+  films: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      date: PropTypes.string.isRequired,
+      inFavorite: PropTypes.bool.isRequired,
+    })
+  ).isRequired,
+
+  filmsIsLoaded: PropTypes.bool.isRequired,
 }
 
 export default FilmsBord;
