@@ -1,11 +1,4 @@
-import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
-
-import {getFilmsList} from "../../pages/api/films";
-
-export const loadFilmsFromApi2 = createAsyncThunk('films/loadFilms', async () => {
-  const result = await getFilmsList();
-  return result;
-})
+import { createSlice } from '@reduxjs/toolkit'
 
 const updateFilmsData = (newFilm, films) => {
   const filmIndex = films.findIndex((film) => film.name === newFilm.name);
@@ -24,7 +17,7 @@ const filmsSlice = createSlice({
     statusLoadFilmms: false,
   },
   reducers: {
-    loadFilms: (state, action) =>{
+    loadFilms: (state, action) => {
       state.filmsData = action.payload
     },
     changeStatusLoadFilms: (state, action) => {

@@ -1,10 +1,10 @@
 import React, {useCallback, useEffect} from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector} from 'react-redux';
 
 import styles from './index.module.css';
 
-import FilmList from "../FilmList";
-import {loadFilmsFromApi} from "../../store/films/actions";
+import FilmList from '../FilmList';
+import {loadFilmsFromApi} from '../../store/films/actions';
 
 function FilmsBord() {
   const films = useSelector(state => state.films.filmsData);

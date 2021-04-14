@@ -1,10 +1,10 @@
-import React, {useCallback, useState} from 'react';
+import React, { useCallback, useState } from 'react';
 import moment from 'moment';
-import {useDispatch} from "react-redux";
+import { useDispatch } from 'react-redux';
 
 import styles from './index.module.css';
 
-import {changeFavoriteStatus} from "../../store/films/actions";
+import { changeFavoriteStatus } from '../../store/films/actions';
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -13,14 +13,14 @@ const formatDate = (dateString) => {
 };
 
 function FilmCard(props) {
-  const {filmData} = props;
+  const { filmData } = props;
   const dispatch = useDispatch();
   const [isDisabled, setIsDisabled] = useState(false);
 
   const onChangeFavoriteStatus = useCallback(() => {
     setIsDisabled(true);
     dispatch(changeFavoriteStatus(filmData.name))
-    .then(() => setIsDisabled(false));
+      .then(() => setIsDisabled(false));
   }, [dispatch, filmData]);
 
   const date = formatDate(filmData.date);
